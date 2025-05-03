@@ -1,0 +1,779 @@
+/* --- Global --- */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+/* General reset for all elements: remove margins/paddings and use border-box sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Apply styles to body and html for full height and RTL layout */
+body, html {
+  height: 100%;
+  font-family: 'Tajawal', sans-serif; /* Use Arabic font */
+  direction: rtl; /* Set layout to right-to-left */
+  position: relative;
+}
+
+/* Full-screen fixed background image */
+.background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url('/image/backgr.png');
+  background-size: cover;      /* Make the image fill the container */
+  background-repeat: no-repeat; /* Prevent tiling */
+  background-position: center;  /* Center the image */
+  z-index: -1; /* Place it behind all other elements */
+}
+
+/* Top navigation bar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Space between brand and links */
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0); /* Transparent background */
+  padding: 20px 40px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100; /* Keep navbar on top */
+}
+
+/* Brand/logo text styling */
+.brand {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Container for navigation links */
+.nav-menu {
+  display: flex;
+  gap: 20px; /* Space between links */
+}
+
+/* Base style for navigation links */
+.nav-menu a {
+  text-decoration: none;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  transition: 0.3s ease;
+  font-size: 15px;
+  background-color: rgba(255, 255, 255, 0.15); /* Light transparent background */
+}
+
+/* Hover effect for links */
+.nav-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Style for the active link */
+.nav-menu .active {
+  background-color: #d1f7c4; /* Light green */
+  color: #022c1c; /* Dark green text */
+  font-weight: bold;
+}
+
+/* Profile icon button (circular) */
+.profile-icon {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 12px;
+  border-radius: 50%; /* Make it round */
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover effect for profile icon */
+.profile-icon:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Style the icon inside the profile button */
+.profile-icon i {
+  font-size: 20px;
+}
+
+/* --- HOME.css --- */
+/* Main container that holds both text and image side by side */
+.main-container {
+  display: flex; /* Align child elements (text + image) in a row */
+  justify-content: space-between; /* Space between text and image */
+  align-items: center; /* Vertically align items */
+  padding: 100px 60px; /* Top/bottom and left/right padding */
+  color: white; /* Default text color */
+}
+
+/* Section for the text content */
+.text-section {
+  max-width: 600px; /* Limit width for readability */
+  text-align: right; /* Align text to the right (for Arabic) */
+  font-size: 18px;
+  line-height: 1.8; /* Space between lines */
+  padding-right: 40px; /* Extra space on the right side */
+}
+
+/* Main heading inside the text section */
+.text-section h1 {
+  font-size: 26px;
+  margin-bottom: 15px; /* Space below the heading */
+}
+
+/* Paragraph styling (usually description text) */
+.text-section p {
+  color: #d1f7c4; /* Light green for better contrast */
+}
+
+/* Styling for the image section next to the text */
+.image-section img {
+  width: 350px; /* Fixed width for larger screens */
+  max-width: 100%; /* Responsive: don't exceed container */
+  border-radius: 25px; /* Rounded corners */
+  box-shadow: 0 0 15px rgba(0,0,0,0.4); /* Soft shadow around image */
+  margin-top: 80px; /* Push image down for alignment */
+}
+
+/* --- LOGIN.css --- */
+/* Login form container styling */
+.login-box {
+  background-color: rgba(0, 34, 0, 0.8); /* Dark green with opacity */
+  width: 350px;
+  padding: 30px 25px;
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Soft shadow around the box */
+  color: #fff; /* Default text color inside the box */
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%); /* Vertically center the box */
+}
+
+/* University logo inside the login box */
+.login-box img {
+  display: block;
+  margin: 0 auto 20px auto; /* Centered with bottom margin */
+  width: 60px;
+}
+
+/* "Login" title inside the box */
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 18px;
+  color: #d1f7c4; /* Light green */
+}
+
+/* Wrapper for each input and icon */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Input field styling */
+.input-group input {
+  width: 100%;
+  padding: 12px 40px 12px 12px; /* Padding for space before icon */
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(215, 237, 225, 0.815); /* Light greenish background */
+  color: #191818;
+  font-size: 14px;
+}
+
+/* Icon inside the input field */
+.input-group i {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: #555;
+}
+
+/* Submit button styling */
+button {
+  width: 100%;
+  background-color: #022c1c; /* Dark green */
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #bbdbd2f2; /* Light greenish on hover */
+}
+
+/* Branding section on the right side */
+.branding-text {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  text-align: center;
+  color: white;
+}
+
+/* Big title for the brand */
+.branding-text h1 {
+  font-size: 72px;
+  font-weight: bold;
+  margin: 0;
+  color: white;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); /* Shadow for better readability */
+}
+
+/* Subtitle under the brand name */
+.branding-text p {
+  font-size: 22px;
+  margin-top: 10px;
+  color: #d1f7c4; /* Light green */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* --- FORM.css --- */
+.report-form-container {
+    background-color: rgba(255, 255, 255, 0.06);
+    padding: 40px;
+    border-radius: 20px;
+    width: 80%;
+    margin: 150px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .report-form-container input,
+  .report-form-container select {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(215, 237, 225, 0.815);
+    color: black;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .full-width {
+    grid-column: span 3;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .submit-btn {
+    background-color: hsla(157, 74%, 8%, 0.597);
+    color: white;
+    padding: 12px 40px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #46b18e;
+  }
+  
+  
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+  
+  .alert-box {
+    display: none;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 8px;
+    width: 60%;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+/* --- ACCOUNT.css --- */
+/* Account page */
+/* تعميم خط عربي مناسب */
+body, input, button, label, h2, h3, li {
+    font-family: 'Cairo', sans-serif;
+  }
+  
+  /* الخلفية الرئيسية */
+  .settings-page {
+    background-image: url('/image/backgr.png');
+
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: white;
+    padding: 20px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* الحاوية الكاملة */
+  .settings-container {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 20px;
+    max-width: 1000px;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+  }
+  
+  /* القائمة الجانبية */
+  .side-menu {
+    width: 200px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    padding-right: 20px;
+  }
+  
+  .side-menu h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  
+  .side-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .side-menu li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+  
+  .side-menu li.active,
+  .side-menu li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* نموذج الإعدادات */
+  .settings-form {
+    flex: 1;
+    padding-right: 40px;
+  }
+  
+  .settings-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  /* صورة البروفايل */
+  .profile-image-container {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .edit-icon {
+    position: absolute;
+    right: calc(50% - 15px);
+    bottom: -10px;
+    background-color: #3b3b3b;
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  /* صفوف النموذج */
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 20px;
+  }
+  
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  input {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+  
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  /* زر الحفظ */
+  .button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .save-button {
+    background-color: hsla(157, 74%, 8%, 0.597);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+  }
+  
+  .save-button:hover {
+    background-color: #46b18e;
+  }
+
+/* --- LOST.css --- */
+.top-bar {
+    display: flex;
+    flex-direction: row-reverse; /* هذا يحط البحث يمين والفلتر يسار */
+    justify-content: space-between;
+    align-items: center;
+    padding: 110px 40px 30px;
+  }
+  
+  .filter-buttons {
+    flex-direction: row-reverse;
+    display: flex;
+    gap: 17px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex: 1;
+  }
+  
+  .filter-buttons button {
+    padding: 2px 16px;
+    width: 100px;
+    background-color: rgba(0, 80, 50, 0.4);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .filter-buttons button:hover {
+    background-color: #46b18e;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  
+  .search-container input {
+
+    padding: 10px 16px;
+    width: 350px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    direction: rtl;
+  }
+  
+  .search-container button {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 80, 50, 0.4);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    display: flex;
+   
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-container button:hover {
+    background-color:  #46b18e;
+  }
+  
+  .items-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px 60px;
+    margin-top: 20px;
+  }
+  
+  .item-card {
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .item-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .item-title {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #022c1c;
+    font-size: 14px;
+  }
+  
+  .item-type {
+    font-size: 12px;
+    margin-top: 4px;
+    color: #555;
+  }
+  
+  .details-button {
+    margin-top: 10px;
+    background-color: #022c1c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .details-button:hover {
+    background-color: #046c3d;
+  }
+
+/* --- SUPPORT.css --- */
+.support-page {
+    padding: 30px 60px 100px;
+    color: white;
+    text-align: center;
+    direction: rtl;
+    min-height: 100vh;
+  }
+  
+  .support-title {
+    font-size: 32px;
+    margin-top: 130px;
+    margin-bottom: 90px;
+    color: #d1f7c4;
+    text-align: right;
+    margin-right: 40px;
+  }
+  
+  .support-cards {
+    margin-top: 130px;
+    margin-bottom: 90px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .support-card {
+    background-color: rgba(255, 255, 255, 0.06);
+    padding: 40px 20px;
+    border-radius: 25px;
+    width: 300px;
+    height: 280px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .support-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .icon-wrapper {
+    background-color: rgba(255, 255, 255, 0.04);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: absolute;
+    top: -60px; 
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .icon {
+    font-size: 70px;
+    color: #d3f3d3;
+  }
+  
+  .support-card h2 {
+    font-size: 18px;
+    color: #d1f7c4;
+    margin-top: 53px;
+    margin-bottom: 25px;
+  }
+  
+  .support-card p {
+    font-size: 14px;
+    color: #eee;
+    line-height: 1.7;
+    margin-bottom: auto;
+  }
+  
+  .support-card button {
+    margin-top: 20px;
+    padding: 10px 24px;
+    background-color: hsla(157, 74%, 8%, 0.597);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .support-card button:hover {
+    background-color: #46b18e;
+  }
+  
+  .extra-content {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 14px;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  
+  .extra-content ul {
+    list-style: disc;
+    padding-right: 20px;
+  }
+  
+  
+  
+  
+    
+  /* الأقسام لداخلية */
+.extra-content,
+.faq-section {
+  text-align: right;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px 20px;
+  color: #d1f7c4;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.extra-content a {
+  color: #bbffef;
+}
+
+/* الأسئلة الشائعة */
+.faq-card {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+  }
+  
+  .arrow {
+    transition: transform 0.3s ease;
+  }
+  
+  .arrow.rotate {
+    transform: rotate(180deg);
+  }
+  
+  .faq-answer {
+    margin-top: 12px;
+    font-size: 15px;
+    color: #e7ffe9;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* تنبيه مخصص للأسئلة الشائعة - توضيح أنه يتطلب حساب جامعي */
+  .faq-note {
+    background-color: rgba(0, 80, 50, 0.4);
+    color: #caffef;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-top: 25px;
+    font-size: 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
