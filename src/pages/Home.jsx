@@ -1,9 +1,12 @@
 import React from 'react';
+import Navbar from '../components/navbar';
 
 // Home component (main landing page after login)
 const Home = () => {
   return (
-    <div dir="rtl"> {/* Right-to-left layout for Arabic content */}
+    <div dir="rtl"> 
+    <Navbar />
+    {/* Right-to-left layout for Arabic content */}
       <div className="background"></div> {/* Optional background styling */}
 
       {/* Main content container */}

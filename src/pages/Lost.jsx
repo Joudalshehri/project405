@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
+import CustomButton from '../components/CustomButton'; // Import the reusable button component
+import Navbar from '../components/navbar';
 // Component to display lost items with filtering and search
 const Lost = () => {
   const [allItems, setAllItems] = useState([]);         // All items from the backend
@@ -48,6 +49,7 @@ const Lost = () => {
 
   return (
     <div dir="rtl">
+      <Navbar />
       <div className="background"></div>
 
       {/* Top bar with filter buttons and search box */}
@@ -88,7 +90,9 @@ const Lost = () => {
               <div className="item-type">التاريخ: {item.date}</div>
               <div className="item-type">الوقت: {item.time}</div>
               <div className="item-type">الموقع: {item.location}</div>
-              <button className="details-button">التفاصيل</button>
+
+              {/* Use the custom reusable button component */}
+              <CustomButton>التفاصيل</CustomButton>
             </div>
           ))
         ) : (

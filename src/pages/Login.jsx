@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Used for navigation after login
+import { useNavigate } from 'react-router-dom';
+import CustomButton from '../components/CustomButton';
 
-// Login component
-const Login = () => {
+function Login() {
   const [username, setUsername] = useState(''); // Store username input
   const [password, setPassword] = useState(''); // Store password input
   const navigate = useNavigate(); // Hook for redirecting after login
 
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form behavior (page reload)
-
+  
     // Validate that both fields are filled
     if (!username.trim() || !password.trim()) {
-      alert('يرجى إدخال اسم المستخدم وكلمة المرور'); // Show alert if either field is empty
+      alert('يرجى إدخال اسم المستخدم وكلمة المرور');
       return;
     }
 
@@ -22,29 +22,46 @@ const Login = () => {
       alert('يجب أن يكون اسم المستخدم مكونًا من 7 أرقام');
       return;
     }
+   
 
-    // ✅ Fake login without server for testing purposes
-    localStorage.setItem('isAuthenticated', 'true'); // Store login status in browser
-    navigate('/home'); // Redirect to home page
+    try {
+      // Send login data to backend PHP 
+      const response = await fetch('http://localhost/login/login1.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();// Parse JSON response
+
+      // If login is successful store status and redirect to home page
+      if (data.success) {
+        localStorage.setItem('isAuthenticated', 'true');
+        navigate('/home');
+      } else {
+        alert(data.message);// Show error message from backend
+      }
+    } catch (error) {
+      alert('حدث خطأ أثناء الاتصال بالخادم');
+      console.error('Login error:', error);
+    }
   };
 
-  return (
-    <div dir="rtl" className="login-page"> {/* Right-to-left layout for Arabic UI */}
-      <div className="background"></div> {/* Optional background design */}
 
-      {/* Logo and header */}
+  return (
+    <div dir="rtl" className="login-page">
+      <div className="background"></div>
+
       <div className="branding-text">
         <h1>مُسترد</h1>
         <p>حيث تجد المفقودات طريقها</p>
       </div>
 
-      {/* Login form box */}
       <div className="login-box">
-        <img src="/image/KAU.png" alt="شعار الجامعة" /> {/* University logo */}
+        <img src="/image/KAU.png" alt="شعار الجامعة" />
 
         <h2>تسجيل الدخول</h2>
 
-        {/* Login form */}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <i className="fas fa-user"></i>
@@ -64,11 +81,11 @@ const Login = () => {
               placeholder="كلمة المرور"
             />
           </div>
-          <button type="submit">تسجيل الدخول</button> {/* Submit button */}
+          <CustomButton type="submit">تسجيل الدخول</CustomButton>
         </form>
       </div>
     </div>
   );
-};
+}
 
 export default Login;

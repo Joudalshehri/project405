@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { FaHeadphones, FaQuestionCircle, FaFileAlt } from 'react-icons/fa';
+import CustomButton from '../components/CustomButton';
+import FaqCard from '../components/FaqCard'; // Import the reusable FAQ card component
+import Navbar from '../components/navbar';
 
 // Support component with 3 expandable help sections
 const Support = () => {
@@ -19,7 +22,7 @@ const Support = () => {
   return (
     <>
       <div className="background"></div>
-
+      <Navbar />
       <div className="support-page">
         <h1 className="support-title">هل تحتاج إلى مساعدة؟ نحن هنا لمساعدتك!</h1>
 
@@ -30,7 +33,10 @@ const Support = () => {
             <div className="icon-wrapper"><FaFileAlt className="icon" /></div>
             <h2>المساعدة والتوثيق</h2>
             <p>تعرّف على كيفية استخدام المنصة، والإبلاغ عن المفقودات، واسترجاعها بسهولة.</p>
-            <button onClick={() => handleToggle('docs')}>اقرأ المزيد</button>
+
+            {/* Toggle documentation section */}
+            <CustomButton onClick={() => handleToggle('docs')}>اقرأ المزيد</CustomButton>
+
             {activeSection === 'docs' && (
               <div className="faq-section">
                 {[
@@ -38,13 +44,13 @@ const Support = () => {
                   { q: "هل يمكن تعديل البلاغ بعد الإرسال؟", a: "لا يمكن حاليًا تعديل البلاغ من الواجهة، لكن يمكنك التواصل مع الدعم الفني لحذفه أو تعديله." },
                   { q: "هل الصور إلزامية؟", a: "الصور غير إلزامية، لكنها تسهّل التعرف على المفقودات بشكل كبير." }
                 ].map((item, i) => (
-                  <div key={i} className={`faq-card ${openDoc === i ? 'open' : ''}`}>
-                    <div className="faq-question" onClick={() => setOpenDoc(openDoc === i ? null : i)}>
-                      <span>{item.q}</span>
-                      <span className={`arrow ${openDoc === i ? 'rotate' : ''}`}>⌄</span>
-                    </div>
-                    {openDoc === i && <div className="faq-answer">{item.a}</div>}
-                  </div>
+                  <FaqCard
+                    key={i}
+                    question={item.q}
+                    answer={item.a}
+                    isOpen={openDoc === i}
+                    onToggle={() => setOpenDoc(openDoc === i ? null : i)}
+                  />
                 ))}
               </div>
             )}
@@ -55,7 +61,10 @@ const Support = () => {
             <div className="icon-wrapper"><FaQuestionCircle className="icon" /></div>
             <h2>الأسئلة الشائعة</h2>
             <p>إجابات على الأسئلة الأكثر شيوعًا حول كيفية استخدام منصة مُسترد.</p>
-            <button onClick={() => handleToggle('faq')}>اقرأ المزيد</button>
+
+            {/* Toggle FAQ section */}
+            <CustomButton onClick={() => handleToggle('faq')}>اقرأ المزيد</CustomButton>
+
             {activeSection === 'faq' && (
               <div className="faq-section">
                 {[
@@ -63,13 +72,13 @@ const Support = () => {
                   { q: "هل أحتاج لتسجيل دخول؟", a: "نعم، الخدمة متاحة فقط لمنسوبي جامعة الملك عبدالعزيز عبر الدخول الموحد." },
                   { q: "متى يظهر الغرض في صفحة المفقودات؟", a: "يظهر فور الإرسال، ويُعرض تلقائيًا في صفحة المفقودات." }
                 ].map((item, i) => (
-                  <div key={i} className={`faq-card ${openQuestion === i ? 'open' : ''}`}>
-                    <div className="faq-question" onClick={() => setOpenQuestion(openQuestion === i ? null : i)}>
-                      <span>{item.q}</span>
-                      <span className={`arrow ${openQuestion === i ? 'rotate' : ''}`}>⌄</span>
-                    </div>
-                    {openQuestion === i && <div className="faq-answer">{item.a}</div>}
-                  </div>
+                  <FaqCard
+                    key={i}
+                    question={item.q}
+                    answer={item.a}
+                    isOpen={openQuestion === i}
+                    onToggle={() => setOpenQuestion(openQuestion === i ? null : i)}
+                  />
                 ))}
               </div>
             )}
@@ -80,7 +89,10 @@ const Support = () => {
             <div className="icon-wrapper"><FaHeadphones className="icon" /></div>
             <h2>الدعم الفني والتواصل</h2>
             <p>إذا لم تجد حلًا لمشكلتك، يمكنك التواصل مع فريق الدعم عبر الطرق التالية:</p>
-            <button onClick={() => handleToggle('contact')}>تواصل معنا</button>
+
+            {/* Toggle contact section */}
+            <CustomButton onClick={() => handleToggle('contact')}>تواصل معنا</CustomButton>
+
             {activeSection === 'contact' && (
               <div className="faq-section">
                 {[
@@ -88,13 +100,13 @@ const Support = () => {
                   { q: "ما أوقات استقبال الاستفسارات؟", a: "نعمل من الأحد إلى الخميس، من الساعة 9 صباحًا حتى 5 مساءً." },
                   { q: "أين يقع مكتب الدعم؟", a: "نقع في مركز تقنية المعلومات - جامعة الملك عبدالعزيز." }
                 ].map((item, i) => (
-                  <div key={i} className={`faq-card ${openContact === i ? 'open' : ''}`}>
-                    <div className="faq-question" onClick={() => setOpenContact(openContact === i ? null : i)}>
-                      <span>{item.q}</span>
-                      <span className={`arrow ${openContact === i ? 'rotate' : ''}`}>⌄</span>
-                    </div>
-                    {openContact === i && <div className="faq-answer">{item.a}</div>}
-                  </div>
+                  <FaqCard
+                    key={i}
+                    question={item.q}
+                    answer={item.a}
+                    isOpen={openContact === i}
+                    onToggle={() => setOpenContact(openContact === i ? null : i)}
+                  />
                 ))}
               </div>
             )}

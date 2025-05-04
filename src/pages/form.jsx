@@ -1,8 +1,12 @@
+// Import necessary React hooks and components
 import React, { useState } from 'react';
+import FormInput from '../components/Forminput'; // Reusable input component
+import CustomButton from '../components/CustomButton'; // Reusable button component
+import Navbar from '../components/navbar'; // Navigation bar component
 
-// React component for the lost item report form
+// React component for submitting a lost item report
 const Form = () => {
-  // Initialize form state
+  // State to hold the form data
   const [formData, setFormData] = useState({
     itemName: '',
     itemType: '',
@@ -13,42 +17,41 @@ const Form = () => {
     image: null
   });
 
-  // Handle input changes (text, select, file)
+  // Handles changes to input fields and updates state
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+    // Special handling for file input (image)
     if (name === 'image') {
-      // Set the selected file if it's an image
       setFormData({ ...formData, image: files?.[0] || null });
     } else {
-      // Update text-based input fields
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  // Handle form submission
+  // Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent page reload
 
-    // Prepare data for POST request
+    // Create FormData object to handle file uploads
     const formDataToSend = new FormData();
     Object.entries(formData).forEach(([key, val]) => {
       if (key === 'image' && val) {
-        formDataToSend.append('image', val); // Append file if available
+        formDataToSend.append('image', val);
       } else {
-        formDataToSend.append(key, val); // Append text inputs
+        formDataToSend.append(key, val);
       }
     });
 
+    // Send POST request to the server
     try {
-      // Send data to the backend (Node.js Express server)
       const response = await fetch('http://localhost:5000/api/reports', {
         method: 'POST',
         body: formDataToSend
       });
 
       if (response.ok) {
-        alert('تم الإرسال بنجاح!'); // Show success alert
-        // Reset form fields
+        alert('تم الإرسال بنجاح!'); // Success message
+        // Reset form
         setFormData({
           itemName: '',
           itemType: '',
@@ -59,37 +62,59 @@ const Form = () => {
           image: null
         });
       } else {
-        alert('فشل في الإرسال.'); // Show failure alert
+        alert('فشل في الإرسال.'); // Error message
       }
     } catch (error) {
       console.error('خطأ:', error);
-      alert('حدث خطأ أثناء الإرسال.'); // Handle any unexpected errors
+      alert('حدث خطأ أثناء الإرسال.');
     }
   };
 
-  // JSX for rendering the form
+  // JSX for the form UI
   return (
-    <div dir="rtl">
+    <div dir="rtl"> {/* Right-to-left layout for Arabic */}
+      <Navbar />
       <div className="background"></div>
       <form className="report-form-container" onSubmit={handleSubmit}>
-        <div className="form-field">
-          <label>اسم الغرض المفقود</label>
-          <input type="text" name="itemName" value={formData.itemName} onChange={handleChange} required />
-        </div>
+        {/* Input for item name */}
+        <FormInput
+          label="اسم الغرض المفقود"
+          type="text"
+          name="itemName"
+          value={formData.itemName}
+          onChange={handleChange}
+          required
+        />
 
-        <div className="form-field">
-          <label>تاريخ إيجاد المفقود</label>
-          <input type="date" name="date" value={formData.date} onChange={handleChange} required />
-        </div>
+        {/* Input for date found */}
+        <FormInput
+          label="تاريخ إيجاد المفقود"
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={handleChange}
+          required
+        />
 
-        <div className="form-field">
-          <label>وقت إيجاد المفقود</label>
-          <input type="time" name="time" value={formData.time} onChange={handleChange} required />
-        </div>
+        {/* Input for time found */}
+        <FormInput
+          label="وقت إيجاد المفقود"
+          type="time"
+          name="time"
+          value={formData.time}
+          onChange={handleChange}
+          required
+        />
 
+        {/* Dropdown for item type */}
         <div className="form-field">
           <label>نوع الغرض المفقود</label>
-          <select name="itemType" value={formData.itemType} onChange={handleChange} required>
+          <select
+            name="itemType"
+            value={formData.itemType}
+            onChange={handleChange}
+            required
+          >
             <option value="">اختر النوع</option>
             <option value="الأجهزة">الأجهزة</option>
             <option value="الملابس">الملابس</option>
@@ -97,18 +122,30 @@ const Form = () => {
           </select>
         </div>
 
-        <div className="form-field">
-          <label>مكان إيجاد المفقود</label>
-          <input type="text" name="location" value={formData.location} onChange={handleChange} required />
-        </div>
+        {/* Input for location found */}
+        <FormInput
+          label="مكان إيجاد المفقود"
+          type="text"
+          name="location"
+          value={formData.location}
+          onChange={handleChange}
+          required
+        />
 
+        {/* File input for image upload */}
         <div className="form-field">
           <label>إرفاق صورة</label>
-          <input type="file" name="image" accept="image/*" onChange={handleChange} />
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+          />
         </div>
 
+        {/* Submit button */}
         <div className="full-width">
-          <button type="submit" className="submit-btn">إرسال</button>
+          <CustomButton type="submit">إرسال</CustomButton>
         </div>
       </form>
     </div>

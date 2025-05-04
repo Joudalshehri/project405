@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import CustomButton from '../components/CustomButton';
+import Navbar from '../components/navbar';
 
 // State variables for user inputs
 const Account = () => {
@@ -18,7 +19,7 @@ const Account = () => {
   
   return (
     <div dir="rtl">
-
+     <Navbar />
 
       <div className="settings-page">
         <div className="settings-container">
@@ -61,7 +62,7 @@ const Account = () => {
               </div>
 
               <div className="button-container">
-                <button type="submit" className="save-button">حفظ التغيير</button>
+              <CustomButton type="submit">حفظ التغيير</CustomButton>
               </div>
             </form>
           </div>
